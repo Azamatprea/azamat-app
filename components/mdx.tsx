@@ -43,6 +43,11 @@ const baseComponents = {
       {props.children}
     </blockquote>
   ),
+  pre: (props: { children?: ReactNode }) => (
+    <pre className="mb-4 overflow-x-auto border border-line-strong bg-panel p-4 text-[0.85rem] leading-relaxed [&_code]:text-ink">
+      {props.children}
+    </pre>
+  ),
   code: (props: { children?: ReactNode }) => (
     <code className="reading text-[0.9em]">{props.children}</code>
   ),

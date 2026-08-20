@@ -1,0 +1,50 @@
+---
+title: The cost math nobody runs
+slug: the-cost-math-nobody-runs
+date: "2026-08-20"
+description: What on-prem LLM deployment actually costs once you count engineers, and the volume threshold where it beats hosted.
+published: true
+---
+
+One of the case studies on this site says on-prem inference cut costs <R>62%</R> against the hosted contracts my client had been quoted. That number is true, and it's also the kind of number that gets people into trouble, because it's the answer to a narrow question — what does a token cost to produce — and the decision it gets used for is a much wider one.
+
+So here is the math I actually run with clients, including the parts that don't flatter my own thesis.
+
+## The rented column is easy
+
+Hosted inference is one line: tokens times price. If your workload is 20 million queries a year averaging 2K tokens in and 500 out, you can get within 10% of your annual bill in a spreadsheet cell. That legibility is worth something real — it's why finance teams like it, and it's the honest half of every "just use the API" argument.
+
+## The owned column has a term people skip
+
+The owned column looks like this:
+
+```
+hardware        amortized over 3 years, not 5 — GPU generations are short
+power + space   small but not zero; your facilities team will find you
+engineers       the dominant term at most scales
+inference       what the 62% number measures
+```
+
+The engineer line is the one that vanishes from vendor comparisons and conference talks alike. A deployment like the ones I work on needs a fraction of an engineer permanently: someone who owns the retrieval evals, patches the serving stack, and re-quantizes when a better base model ships. Call it 0.3–0.5 FTE once things are stable, more in year one. At loaded cost, that's often <R>$60–100K</R> a year before the first token comes out.
+
+If your query volume is small, that line alone loses the argument. A team doing 100K queries a month should rent, and I tell them so.
+
+## The threshold
+
+Put both columns over the same denominator and there's a crossover volume where owned wins — where amortized hardware plus the engineer fraction plus power drops below the hosted bill. For the workloads I've deployed, with a quantized 70B-class model on hardware in the low six figures, the crossover has landed somewhere around <R>2–4M queries/month</R>. Below it, hosted is cheaper and simpler. Above it, every month is a subsidy to your vendor.
+
+Two things about that range. First, it's mine, not universal — it moves with your token lengths, your latency floor, and how much of the engineer you already have on staff. Second, most companies evaluating this are below it. The on-prem argument is not "everyone should own"; it's that the companies above the line rarely run this math at all, because the rented column arrives as an invoice and the owned column arrives as a project.
+
+## What moves the threshold
+
+Two things have moved it meaningfully downward in my own work.
+
+Quantization moves the hardware term. The step from FP16 to INT8 roughly halves the memory you need to serve the same model, which either halves the hardware or doubles the throughput. The accuracy cost is measurable and task-dependent — measure it on your evals, not on someone's benchmark — but for document QA it has been small enough that the economics dominate.
+
+Governed tool layers move the engineer term. When internal systems are exposed as tools behind something like MCP — access-controlled, logged, model-agnostic — the model becomes a swappable part. Integration work stops recurring every time the model changes, which is exactly the work that used to justify "just pay the vendor to deal with it."
+
+## The part that isn't math
+
+There's a version of this decision that no spreadsheet captures: some data can't go out at any price. For those clients the threshold is irrelevant — the hosted column doesn't exist. But that's a compliance argument, and it convinces nobody who isn't already compelled by it. The cost argument is the one that generalizes, and it only generalizes if you run all four lines, engineers included.
+
+Own your AI the way you own your database: not because renting is wrong, but because above a knowable volume, it's expensive — and the threshold is closer than the invoice makes it look.

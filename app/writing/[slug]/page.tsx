@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPosts, getPost } from "@/lib/content";
+import { ogImage } from "@/lib/og";
 import { Mdx } from "@/components/mdx";
 
 // getPost only returns published posts, so unpublished drafts 404 here
@@ -23,6 +24,7 @@ export async function generateMetadata({
     title: post.title,
     description: post.description,
     alternates: { canonical: `/writing/${post.slug}` },
+    openGraph: { ...ogImage(post.title, post.date), type: "article", publishedTime: post.date },
   };
 }
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getWorkEntries, getWorkEntry } from "@/lib/content";
+import { ogImage } from "@/lib/og";
 import { systemDiagrams } from "@/components/system-diagrams";
 import { Mdx } from "@/components/mdx";
 
@@ -21,6 +22,7 @@ export async function generateMetadata({
     title: entry.title,
     description: entry.summary,
     alternates: { canonical: `/work/${entry.slug}` },
+    openGraph: ogImage(entry.title, `${entry.status} \u00b7 ${entry.year}`),
   };
 }
 

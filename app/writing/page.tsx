@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getPosts } from "@/lib/content";
+import { ogImage } from "@/lib/og";
 import { Section } from "@/components/section";
 
 export const metadata: Metadata = {
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "Notes on on-prem AI, quantization economics, MCP, and public data.",
   alternates: { canonical: "/writing" },
+  openGraph: ogImage("Writing", "posts"),
 };
 
 export default function WritingIndex() {

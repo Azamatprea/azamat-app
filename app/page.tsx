@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { getWorkEntries, getPosts } from "@/lib/content";
+import { ogImage } from "@/lib/og";
 import { Section } from "@/components/section";
 import { BoundaryLine } from "@/components/boundary-line";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": "/writing/rss.xml" },
+  },
+  openGraph: ogImage(site.tagline),
+};
 
 export default function Home() {
   const work = getWorkEntries();

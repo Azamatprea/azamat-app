@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getWorkEntries } from "@/lib/content";
+import { ogImage } from "@/lib/og";
 import { Section } from "@/components/section";
 
 export const metadata: Metadata = {
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "Case studies: on-prem models, an assistant over 200M radiation measurements, and a multi-agent research platform.",
   alternates: { canonical: "/work" },
+  openGraph: ogImage("Work", "case studies"),
 };
 
 export default function WorkIndex() {

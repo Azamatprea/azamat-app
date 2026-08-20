@@ -1,9 +1,31 @@
 ---
 title: 200 million measurements nobody could use
 slug: 200-million-measurements
-date: "2026-10-01"
+date: "2026-08-02"
 description: On public data that isn't usable, and what it takes to change that.
-published: false
+published: true
 ---
 
-Draft.
+After the Fukushima disaster, official radiation data was scarce, slow, and widely distrusted. Volunteers responded by building their own sensors, driving them around Japan, and publishing everything. Fifteen years later that project — Safecast — holds more than <R>200 million</R> measurements, one of the largest open environmental datasets in existence.
+
+I've spent the last year and a half building an assistant on top of it, and the thing I keep coming back to is how long those measurements sat in a strange state: completely public, and almost completely unusable.
+
+## Public is a license, not a property
+
+"Open data" describes the terms, not the experience. The measurements were all there — API, exports, a map with query tools. But actually answering a question with them meant knowing which of three services held what, how device metadata related to readings, what the units meant, and how to filter out the sensor artifacts every real-world dataset carries. The people with those skills mostly weren't the people with the questions.
+
+A journalist wanting to know how readings near Iitate changed since 2015 faced a choice: learn the API, or ask someone. In practice, "ask someone" meant a volunteer with a day job, and time-to-answer was measured in days. The data was open the way a library with no catalog is open.
+
+## What usable took
+
+The assistant lets anyone ask that Iitate question in plain language and get an answer in seconds, with the actual measurements behind it. Three things turned out to matter, and none of them was the model.
+
+First, structure: Safecast's data services are exposed as governed tools — typed, access-controlled, logged — so the assistant composes real queries instead of hallucinating around a REST doc. Second, scope: it answers from measurements and refuses to editorialize. Safecast's credibility is its neutrality, and an assistant that speculated about safety would spend that credibility fast; we evaluate against a <R>500-query</R> set specifically to catch it. Third, embedding: it lives inside the map people already use, not on a separate page nobody visits.
+
+## The graveyard problem
+
+Safecast isn't unusual. Most open-data portals are graveyards: datasets published to satisfy a mandate, downloaded a handful of times, cited never. The publishing side of open data got institutionalized; the *using* side never did. For a decade the honest answer to "why isn't anyone using this?" was that usable meant building a bespoke interface per dataset, and nobody funds that.
+
+That's the part that has actually changed. A language model in front of governed tools is a general-purpose interface, and the marginal cost of making the next dataset conversational is falling toward configuration. The gap between public and usable was an engineering economics problem, and the economics just moved.
+
+The measurements were always there. What changed is that <R>200 million</R> of them finally answer questions.

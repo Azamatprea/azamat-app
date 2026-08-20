@@ -1,9 +1,31 @@
 ---
 title: What quantization costs you, measured
 slug: what-quantization-costs-you
-date: "2026-09-01"
+date: "2026-08-17"
 description: INT8 vs FP16 on real eval sets — the accuracy you give up and where it matters.
-published: false
+published: true
 ---
 
-Draft.
+Every on-prem deployment I've done runs a quantized model, because quantization is what makes the hardware line in the budget survive contact with procurement. Serving a 70B-class model at FP16 wants roughly <R>140 GB</R> of memory for weights alone; at INT8 it wants roughly <R>70 GB</R>. That's the difference between one server and two, and it compounds through power, rack space, and failover.
+
+The question is what you pay for that in quality. The literature answers with benchmarks; the honest answer is "it depends on your task," which is unhelpful until you measure your task. So here's what I've measured, with the caveats attached.
+
+## The setup
+
+The eval sets are the clients' own: document QA over their corpora, answers graded against reference answers, plus the retrieval-independent slices we use to separate model errors from retrieval errors. Same prompts, same retrieval, same decoding settings — the only variable is weight precision. This is the boring discipline that makes the numbers mean something: a quantization comparison on someone else's benchmark tells you about their distribution, not yours.
+
+## What INT8 cost us
+
+On document QA — extract, summarize, answer with citations — the drop was consistently small: about <R>1 point</R> of graded accuracy on evals where the FP16 baseline scored in the high eighties to low nineties. For that workload, at that scale, it's a rounding error against a <R>~2×</R> memory saving. This is the case that pays for the whole approach, and it's also the most common enterprise workload by a wide margin.
+
+Where it wasn't a rounding error:
+
+- Multi-step numeric reasoning — chained calculations, financial reconciliation-style questions — degraded noticeably more, a few points rather than one. If your workload is arithmetic-shaped, quantize more carefully or not at all.
+- Low-resource-language output got subtly worse in fluency before it got worse in correctness. Grading only on accuracy would have missed it; a client's bilingual reviewers didn't.
+- The tails moved more than the means. Worst-case outputs got somewhat stranger, which matters if your risk profile is set by the worst answer, not the average one.
+
+## The method is the takeaway
+
+I'd hold the specific numbers loosely — they're two corpora, a handful of model families, one year. The transferable part is the procedure: hold everything constant except precision, grade on your own eval set, and read the slices, not just the headline number. It's a day or two of work, and it converts "quantization is basically fine" from folklore into a measurement with your name on it.
+
+The reason this matters beyond engineering hygiene: quantization is a load-bearing term in the on-prem cost argument. The <R>~2×</R> saving is real, but it's only honest if you've priced the quality you traded for it — on your task, not on a benchmark.

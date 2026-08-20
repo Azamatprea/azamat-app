@@ -14,7 +14,7 @@ export const site = {
   email: "azamat.erkinov@tensorai.io",
   links: {
     github: "https://github.com/Azamatprea",
-    linkedin: "https://www.linkedin.com/in/azamaterkinov",
+    linkedin: "https://www.linkedin.com/in/azamat-erkinov/",
     resume: "/Azamat_Erkinov.pdf",
     safecastMap: "https://map.safecast.org",
   },

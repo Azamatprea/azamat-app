@@ -1,9 +1,31 @@
 ---
 title: Why MCP changes build-vs-rent
 slug: why-mcp-changes-build-vs-rent
-date: "2026-09-15"
+date: "2026-08-10"
 description: When internal systems are already governed tools, swapping the model underneath gets cheap.
-published: false
+published: true
 ---
 
-Draft.
+The strongest argument for renting AI was never the model. It was the integration work around the model: connecting it to your CRM, your database, your document store, your internal APIs, each one a bespoke project with auth to figure out and edge cases to absorb. Vendors understood this. The model was the pitch; the integrations were the moat.
+
+MCP quietly drains that moat, and I don't think the build-vs-rent conversation has caught up.
+
+## Integration used to be the recurring cost
+
+Before tool protocols, every model change meant revisiting the plumbing. Function-calling formats differed, prompt conventions differed, and the glue code that made GPT-flavored tools work needed rework for the next model. So integration effort wasn't a one-time cost — it recurred with every switch, which meant switching had a price, which meant you didn't switch. That's lock-in doing its job.
+
+MCP inverts the dependency. You expose the internal system once — as a server with typed tools, its own access control, its own logging — and any compliant model can use it. In a deployment I did this year, the client's CRM, Postgres, S3, and internal APIs went behind three MCP servers. Building the first integrations the old way had taken about <R>3 weeks</R> each. After the layer existed, connecting the next system took <R>4 days</R> — and none of it belonged to any particular model.
+
+## What "governed" buys you
+
+The part enterprises actually care about isn't the protocol, it's the adjective. A governed tool layer means the security team reviews the tool's permissions once, instead of auditing what a model might do with raw database access. Every call is logged with its arguments. Scope is enforced at the server, not requested politely in a prompt. This is the shape of AI access that compliance can approve — and it's the same shape whether the model behind it is hosted or running on a box down the hall.
+
+That last clause is the whole point. Once your systems are model-agnostic tools, the model becomes a component, priced like a component.
+
+## The option value nobody prices
+
+Here's how this changes the math. Renting was defensible partly because switching costs made any commitment durable — if leaving your vendor costs six months of integration rework, the rent includes insurance you can't decline. With a tool layer, switching the model is a config change and an eval run. Open-weight model gets good enough? Swap it in. Hosted model drops price? Swap back. The tool layer converts vendor lock-in into a spot market.
+
+The honest caveats: MCP servers are software you now own — someone patches them, someone owns the access policies, and that someone is on your payroll. The spec is young and moving. And a tool layer doesn't make the *model* choice easy, just cheap to revise.
+
+But "cheap to revise" is the property that matters. My thesis on this site is that companies should own their AI the way they own their databases. MCP is why that stopped being a romantic position: owning used to mean marrying your infrastructure choices, and now it means being free to change them.

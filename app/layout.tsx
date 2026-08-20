@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Schibsted_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/lib/site";
 import { ThemeToggle } from "@/components/theme-toggle";
 import "./globals.css";
@@ -72,6 +73,7 @@ export default function RootLayout({
             <p className="text-sm text-slate">{site.nowLine}</p>
           </footer>
         </div>
+        <Analytics />
       </body>
     </html>
   );

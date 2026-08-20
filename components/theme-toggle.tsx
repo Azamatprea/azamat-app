@@ -26,6 +26,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-pressed={dark === true}
+      aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
       className="label cursor-pointer border border-line-strong bg-panel px-2.5 py-1.5 rounded-[2px] hover:border-slate"
     >
       {dark ? "Light" : "Dark"}

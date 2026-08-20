@@ -19,7 +19,7 @@ export default function Home() {
   const posts = getPosts().slice(0, 3);
 
   return (
-    <div className="flex flex-col gap-16">
+    <div className="reveal flex flex-col gap-16">
       <Section label="Intro">
         <h1 className="text-3xl sm:text-4xl font-bold mb-5">{site.name}</h1>
         <p className="text-lg text-slate mb-7 text-balance">{site.tagline}</p>

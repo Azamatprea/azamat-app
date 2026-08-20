@@ -68,6 +68,9 @@ export default function RootLayout({
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <div className="mx-auto max-w-[820px] px-6">
           <header className="flex items-baseline justify-between pt-10 pb-16">
             <nav aria-label="Main" className="flex items-baseline gap-7">

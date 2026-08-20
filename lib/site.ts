@@ -15,7 +15,7 @@ export const site = {
   links: {
     github: "https://github.com/Azamatprea",
     linkedin: "https://www.linkedin.com/in/azamaterkinov",
-    resume: "/resume.pdf",
+    resume: "/Azamat_Erkinov.pdf",
     safecastMap: "https://map.safecast.org",
   },
   nowLine:

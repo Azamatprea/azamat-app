@@ -55,7 +55,7 @@ export function GET(req: NextRequest) {
           {title}
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ width: "100%", height: 3, background: "#B3691F" }} />
+          <div style={{ width: "100%", height: 3, background: "#96581B" }} />
           <div
             style={{
               display: "flex",
@@ -67,7 +67,7 @@ export function GET(req: NextRequest) {
             }}
           >
             <span>{site.name}</span>
-            <span style={{ color: "#B3691F" }}>azamat.app</span>
+            <span style={{ color: "#96581B" }}>azamat.app</span>
           </div>
         </div>
       </div>

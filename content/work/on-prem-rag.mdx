@@ -8,11 +8,29 @@ order: 2
 summary: Quantized open-weight models on-prem, client-specific RAG over 400K+ documents, and governed MCP tools.
 stack:
   - Quantized open-weight models
-  - Hybrid retrieval
+  - Hybrid retrieval + reranking
   - MCP
   - Postgres
   - S3
 links: {}
 ---
 
-Case study body lands in pass 4.
+## Context
+
+Two enterprise clients (anonymized — the work is under NDA) with the same underlying problem: hundreds of thousands of internal documents their teams needed to query, and compliance rules that made sending them to a hosted model API a non-starter. Both had been quoted cloud-AI contracts priced on the assumption that there was no alternative.
+
+## What I built
+
+Quantized open-weight models deployed on hardware inside each client's network, with client-specific RAG over 400K+ documents.
+
+The retrieval layer is hybrid — lexical and dense retrieval fused, then reranked, with citations back to source documents on every answer. Hybrid wasn't a default: these corpora are full of internal jargon and part numbers that embedding models miss, and pure dense retrieval was the single biggest source of wrong answers in early testing. Quantization was the other load-bearing choice — it's what makes the economics work on hardware a client can actually buy, and the accuracy cost was measured, not assumed.
+
+The piece that changed the clients' build-vs-rent math most was neither of those. Three MCP servers expose their CRM, Postgres, S3, and internal APIs as governed tools — access-controlled, logged, model-agnostic. Once internal systems are tools, connecting the next one is configuration, not an integration project, and the model underneath becomes swappable.
+
+<SystemDiagram />
+
+## Results
+
+- Answer accuracy on the clients' own eval questions: <R>61% → 94%</R> after the hybrid retrieval and reranking work
+- Inference cost down <R>62%</R> versus the hosted-API contracts they were quoted — that's inference cost, not total cost of ownership; the honest comparison includes the engineers who deploy and maintain this, and it favors on-prem only above a real query-volume threshold
+- New system integration: <R>3 weeks → 4 days</R> once the MCP layer existed

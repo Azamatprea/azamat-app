@@ -8,10 +8,30 @@ order: 1
 summary: An MCP-based assistant embedded in the Safecast map, answering plain-language questions across three data services.
 stack:
   - MCP
+  - TypeScript
   - Streaming APIs
   - Scoped key management
 links:
   live: https://map.safecast.org
 ---
 
-Case study body lands in pass 4.
+## Context
+
+Safecast is a volunteer-run environmental monitoring network that formed after the Fukushima disaster, when official radiation data was scarce and distrusted. Fifteen years later it holds more than 200 million measurements — one of the largest open environmental datasets anywhere — but using it meant learning the API, the export formats, or the map's query tools. The data was public without being usable.
+
+## What I built
+
+An assistant embedded directly in the Safecast map that answers questions like "how do readings near Iitate compare to before 2015?" in plain language.
+
+It's built on MCP: the assistant reaches Safecast's three data services — measurements, device metadata, and geographic lookups — as governed tools rather than through a bespoke integration layer. That choice was about survival, not fashion. Safecast runs on volunteers and grant funding, so anything I build has to be maintainable by whoever comes after me, and swapping the underlying model must never mean rewriting the data plumbing.
+
+Two decisions did most of the work. First, streaming across all three services with scoped keys per deployment, so the embedded and standalone versions share one backend without sharing credentials. Second, neutrality guardrails: Safecast's credibility rests on never editorializing about safety, so the assistant is evaluated against a 500-query set specifically for speculative claims — "is this safe?" gets measurements and context, not reassurance.
+
+<SystemDiagram />
+
+## Results
+
+- Time from question to answer: <R>~4 min → under 15 s</R> for map users who previously exported and filtered by hand
+- <R>p95 under 2 s</R> per tool call at <R>10K+</R> monthly queries
+- Speculative responses down <R>78%</R> on the 500-query eval set — measured against our own eval, not an independent benchmark
+- Dual deployment: standalone and embedded in the production map

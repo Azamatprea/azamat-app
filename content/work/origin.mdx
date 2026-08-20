@@ -14,4 +14,19 @@ stack:
 links: {}
 ---
 
-Case study body lands in pass 4.
+## Context
+
+Built in a weekend at the c0mpiled-7 AI Hackathon in Tokyo (a YC Request-for-Startups event), March 2026. The premise: an analyst researching a position reads 10-K filings, cross-references market data, and drafts a thesis — a loop that takes hours per company. We compressed it to seconds.
+
+## What I built
+
+A multi-agent platform structured like a small research desk: a LangGraph orchestrator routes work to specialist AutoGen agents — filing readers, a market-data agent, a synthesis agent that drafts and critiques the thesis — behind a FastAPI service.
+
+The decision that won the engineering award was inference. Running Shisa-70B, a Japanese-tuned open-weight model, let the agents read Japanese filings natively and kept the whole loop on infrastructure we controlled — no rate limits from a hosted API mid-demo, and per-query costs low enough to let agents argue with each other, which is where multi-agent setups actually earn their complexity.
+
+<SystemDiagram />
+
+## Results
+
+- Full research loop — filings in, cited draft thesis out — in <R>12 s</R>, down from the hours an analyst spends; measured under hackathon demo conditions, not production load
+- Won <R>“Most Impressive Engineering Lift”</R> from the judging panel

@@ -23,6 +23,8 @@ Safecast is a volunteer-run environmental monitoring network that formed after t
 
 An assistant embedded directly in the Safecast map that answers questions like "how do readings near Iitate compare to before 2015?" in plain language.
 
+<InlineRecording />
+
 It's built on MCP: the assistant reaches Safecast's three data services — measurements, device metadata, and geographic lookups — as governed tools rather than through a bespoke integration layer. That choice was about survival, not fashion. Safecast runs on volunteers and grant funding, so anything I build has to be maintainable by whoever comes after me, and swapping the underlying model must never mean rewriting the data plumbing.
 
 Two decisions did most of the work. First, streaming across all three services with scoped keys per deployment, so the embedded and standalone versions share one backend without sharing credentials. Second, neutrality guardrails: Safecast's credibility rests on never editorializing about safety, so the assistant is evaluated against a 500-query set specifically for speculative claims — "is this safe?" gets measurements and context, not reassurance.

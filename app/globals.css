@@ -122,3 +122,22 @@ h3 {
     to { opacity: 1; transform: translateY(0); }
   }
 }
+
+/* Footnote-style citation links: quiet until hovered. */
+.citation {
+  font-family: var(--font-mono);
+  font-size: 0.62em;
+  line-height: 0;
+}
+
+.citation a {
+  color: var(--slate);
+  text-decoration: none;
+  padding: 0 0.1em;
+}
+
+.citation a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  color: var(--ink);
+}

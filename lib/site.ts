@@ -8,9 +8,17 @@ export const site = {
   intro: [
     "I study data science and economics at Minerva University, and I build AI systems for data that can't move — either because it's private, or because it's public and nobody's made it usable.",
     "Right now I'm a forward deployed engineer at Tensor AI, putting quantized open-weight models on enterprise hardware so companies stop sending their documents to someone else's API. Before that I automated FCC compliance testing at UL Solutions. Since early 2025 I've been building an assistant for Safecast — it lets anyone ask questions in plain language across 200 million radiation measurements collected by volunteers since Fukushima.",
-    "I won “Most Impressive Engineering Lift” at a YC-RFS hackathon in Tokyo for a multi-agent research platform, and I ran an essay contest on AI safety that reached 900 people across 40 countries.",
+    "I won “Most Impressive Engineering Lift” at a YC-RFS hackathon in Tokyo[^hackathon] for a multi-agent research platform, and I ran an essay contest on AI safety that reached 900 people across 40 countries.[^aiconsensus]",
     "I'm Uzbek, I work in three languages, and Minerva has me living in a different city every semester. Currently in San Francisco.",
   ],
+  // Footnote-style citations rendered as superscript links in the intro.
+  // Markers like [^key] in the intro text resolve here; a marker with no
+  // entry is silently dropped (claim stays as plain text).
+  citations: {
+    hackathon:
+      "https://www.compiled.sh/articles/c0mpiled-7-san-fransokyo#:~:text=Most%20Impressive-,Engineering%20Lift,-%3A%20Origin",
+    aiconsensus: "https://www.aiconsensus.org/",
+  } as Record<string, string>,
   email: "azamat.erkinov@tensorai.io",
   links: {
     github: "https://github.com/Azamatprea",
@@ -20,6 +28,7 @@ export const site = {
   },
   nowLine:
     "Currently in San Francisco, reading about what happened to on-prem search.",
+  signature: "azamat erkinov \u00b7 san francisco",
 } as const;
 
 export type Site = typeof site;

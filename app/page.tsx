@@ -4,6 +4,8 @@ import { site } from "@/lib/site";
 import { getWorkEntries, getPosts } from "@/lib/content";
 import { ogImage } from "@/lib/og";
 import { Section } from "@/components/section";
+import { EntryLinks } from "@/components/entry-links";
+import { renderCitedParagraphs } from "@/components/citations";
 import { BoundaryLine } from "@/components/boundary-line";
 
 export const metadata: Metadata = {
@@ -24,9 +26,7 @@ export default function Home() {
         <h1 className="text-3xl sm:text-4xl font-bold mb-5">{site.name}</h1>
         <p className="text-lg text-slate mb-7 text-balance">{site.tagline}</p>
         <div className="flex flex-col gap-4">
-          {site.intro.map((p) => (
-            <p key={p.slice(0, 24)}>{p}</p>
-          ))}
+          {renderCitedParagraphs(site.intro, site.citations)}
           <p>
             Say hello:{" "}
             <a
@@ -80,16 +80,7 @@ export default function Home() {
                 </p>
               </div>
               <p className="mt-1.5 text-sm text-slate">{entry.summary}</p>
-              {entry.links.live && (
-                <p className="mt-2 text-sm">
-                  <a
-                    href={entry.links.live}
-                    className="underline underline-offset-4 decoration-line-strong hover:decoration-ink"
-                  >
-                    Try it on the live map ↗
-                  </a>
-                </p>
-              )}
+              <EntryLinks links={entry.links} />
             </li>
           ))}
         </ul>

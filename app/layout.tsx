@@ -92,6 +92,9 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <footer className="mt-24 border-t border-line pt-8 pb-14">
             <p className="text-sm text-slate">{site.nowLine}</p>
+            <p className="reading mt-3 text-[0.7rem] tracking-[0.08em] text-slate">
+              {site.signature}
+            </p>
           </footer>
         </div>
         <Analytics />

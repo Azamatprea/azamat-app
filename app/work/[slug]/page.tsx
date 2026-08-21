@@ -4,7 +4,9 @@ import { notFound } from "next/navigation";
 import { getWorkEntries, getWorkEntry } from "@/lib/content";
 import { ogImage } from "@/lib/og";
 import { systemDiagrams } from "@/components/system-diagrams";
+import { InlineRecording } from "@/components/inline-recording";
 import { Mdx } from "@/components/mdx";
+import { EntryLinks } from "@/components/entry-links";
 
 export function generateStaticParams() {
   return getWorkEntries().map((w) => ({ slug: w.slug }));
@@ -57,9 +59,10 @@ export default async function CaseStudy({
           </span>
         </p>
         <h1 className="text-2xl sm:text-3xl font-bold">{entry.title}</h1>
+        <EntryLinks links={entry.links} className="mt-4 text-sm" />
       </header>
 
-      <Mdx source={entry.body} components={Diagram ? { SystemDiagram: Diagram } : {}} />
+      <Mdx source={entry.body} components={{ InlineRecording, ...(Diagram ? { SystemDiagram: Diagram } : {}) }} />
 
       <footer className="mt-12 border-t border-line pt-6">
         <p className="label mb-2">Stack</p>

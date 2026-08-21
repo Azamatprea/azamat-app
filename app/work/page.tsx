@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getWorkEntries } from "@/lib/content";
 import { ogImage } from "@/lib/og";
 import { Section } from "@/components/section";
+import { EntryLinks } from "@/components/entry-links";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -41,16 +42,7 @@ export default function WorkIndex() {
               </Link>
             </h2>
             <p className="text-sm text-slate">{entry.summary}</p>
-            {entry.links.live && (
-              <p className="mt-2 text-sm">
-                <a
-                  href={entry.links.live}
-                  className="underline underline-offset-4 decoration-line-strong hover:decoration-ink"
-                >
-                  Try it on the live map ↗
-                </a>
-              </p>
-            )}
+            <EntryLinks links={entry.links} />
           </li>
         ))}
       </ul>

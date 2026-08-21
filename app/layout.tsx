@@ -86,6 +86,12 @@ export default function RootLayout({
               <Link href="/writing" className="text-sm text-slate hover:text-ink">
                 Writing
               </Link>
+              <Link
+                href="/interactions"
+                className="text-sm text-slate hover:text-ink"
+              >
+                Interactions
+              </Link>
             </nav>
             <ThemeToggle />
           </header>

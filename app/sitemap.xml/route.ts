@@ -10,6 +10,7 @@ export function GET() {
     { loc: `${site.url}/` },
     { loc: `${site.url}/work` },
     { loc: `${site.url}/writing` },
+    { loc: `${site.url}/interactions` },
     ...getWorkEntries().map((w) => ({ loc: `${site.url}/work/${w.slug}` })),
     // getPosts already filters to published, so drafts never appear here.
     ...getPosts().map((p) => ({

@@ -5,6 +5,7 @@ import { getWorkEntries, getWorkEntry } from "@/lib/content";
 import { ogImage } from "@/lib/og";
 import { systemDiagrams } from "@/components/system-diagrams";
 import { InlineRecording } from "@/components/inline-recording";
+import { ScreenshotPair } from "@/components/screenshot-pair";
 import { Mdx } from "@/components/mdx";
 import { EntryLinks } from "@/components/entry-links";
 
@@ -62,7 +63,7 @@ export default async function CaseStudy({
         <EntryLinks links={entry.links} className="mt-4 text-sm" />
       </header>
 
-      <Mdx source={entry.body} components={{ InlineRecording, ...(Diagram ? { SystemDiagram: Diagram } : {}) }} />
+      <Mdx source={entry.body} components={{ InlineRecording, ScreenshotPair, ...(Diagram ? { SystemDiagram: Diagram } : {}) }} />
 
       <footer className="mt-12 border-t border-line pt-6">
         <p className="label mb-2">Stack</p>

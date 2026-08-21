@@ -61,7 +61,8 @@ export function Mdx({
   components = {},
 }: {
   source: string;
-  components?: Record<string, ComponentType>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  components?: Record<string, ComponentType<any>>;
 }) {
   return (
     <MDXRemote source={source} components={{ ...baseComponents, ...components }} />

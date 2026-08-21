@@ -34,3 +34,15 @@ The piece that changed the clients' build-vs-rent math most was neither of those
 - Answer accuracy on the clients' own eval questions: <R>61% → 94%</R> after the hybrid retrieval and reranking work
 - Inference cost down <R>62%</R> versus the hosted-API contracts they were quoted — that's inference cost, not total cost of ownership; the honest comparison includes the engineers who deploy and maintain this, and it favors on-prem only above a real query-volume threshold
 - New system integration: <R>3 weeks → 4 days</R> once the MCP layer existed
+
+{/* TODO: replace with real screenshots — left: anonymized answer with
+    citations; right: redacted view of the retrieval pipeline or eval harness. */}
+
+<ScreenshotPair
+  leftSrc="/media/onprem-answer"
+  leftAlt="An anonymized answer with source citations from the on-prem system"
+  leftCaption="An answer, with citations"
+  rightSrc="/media/onprem-pipeline"
+  rightAlt="A redacted view of the hybrid retrieval pipeline and eval harness"
+  rightCaption="The retrieval pipeline behind it"
+/>

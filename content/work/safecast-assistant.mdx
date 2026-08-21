@@ -37,3 +37,15 @@ Two decisions did most of the work. First, streaming across all three services w
 - <R>p95 under 2 s</R> per tool call at <R>10K+</R> monthly queries
 - Speculative responses down <R>78%</R> on the 500-query eval set — measured against our own eval, not an independent benchmark
 - Dual deployment: standalone and embedded in the production map
+
+{/* TODO: replace with real screenshots — left: assistant answering a query
+    in the map UI; right: the underlying tool call / retrieval trace. */}
+
+<ScreenshotPair
+  leftSrc="/media/safecast-answer"
+  leftAlt="The Safecast assistant answering a radiation query inside the map interface"
+  leftCaption="The answer, inside the map"
+  rightSrc="/media/safecast-trace"
+  rightAlt="The MCP tool calls and retrieval trace behind the answer"
+  rightCaption="The tool calls behind it"
+/>

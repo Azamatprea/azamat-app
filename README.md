@@ -4,7 +4,7 @@ Personal site of [Azamat Erkinov](https://azamat.app) — AI systems for data th
 
 ## Stack
 
-- [Next.js](https://nextjs.org) (App Router) + TypeScript, server-rendered throughout — the only client component is the theme toggle
+- [Next.js](https://nextjs.org) (App Router) + TypeScript, server-rendered throughout — client components only where interaction demands it (theme toggle, ⌘K palette, inline recording, interaction demos)
 - Tailwind CSS 4, with the design tokens as CSS custom properties in `app/globals.css`
 - MDX content rendered with `next-mdx-remote`
 - Deployed on Vercel

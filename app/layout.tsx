@@ -3,7 +3,9 @@ import { Schibsted_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/googl
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/lib/site";
+import { getWorkEntries, getPosts } from "@/lib/content";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { CommandPalette, type PaletteItem } from "@/components/command-palette";
 import "./globals.css";
 
 const schibsted = Schibsted_Grotesk({
@@ -60,6 +62,24 @@ const themeInit = `try{if(localStorage.getItem("theme")==="dark")document.docume
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // Static route index for the ⌘K palette, built once at render time.
+  const paletteItems: PaletteItem[] = [
+    { title: "Home", href: "/", group: "page" },
+    { title: "Work", href: "/work", group: "page" },
+    { title: "Writing", href: "/writing", group: "page" },
+    { title: "Interactions", href: "/interactions", group: "page" },
+    ...getWorkEntries().map((w) => ({
+      title: w.title,
+      href: `/work/${w.slug}`,
+      group: "work",
+    })),
+    ...getPosts().map((p) => ({
+      title: p.title,
+      href: `/writing/${p.slug}`,
+      group: "writing",
+    })),
+  ];
+
   return (
     <html
       lang="en"
@@ -93,12 +113,49 @@ export default function RootLayout({
                 Interactions
               </Link>
             </nav>
-            <ThemeToggle />
+            <div className="flex items-baseline gap-4">
+              <CommandPalette items={paletteItems} />
+              <ThemeToggle />
+            </div>
           </header>
           <main id="main">{children}</main>
           <footer className="mt-24 border-t border-line pt-8 pb-14">
             <p className="text-sm text-slate">{site.nowLine}</p>
-            <p className="reading mt-3 text-[0.7rem] tracking-[0.08em] text-slate">
+            <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+              <li>
+                <a
+                  href={site.links.github}
+                  className="underline underline-offset-4 decoration-line-strong hover:decoration-ink"
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.links.linkedin}
+                  className="underline underline-offset-4 decoration-line-strong hover:decoration-ink"
+                >
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="underline underline-offset-4 decoration-line-strong hover:decoration-ink"
+                >
+                  {site.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.links.resume}
+                  className="underline underline-offset-4 decoration-line-strong hover:decoration-ink"
+                >
+                  Résumé (PDF)
+                </a>
+              </li>
+            </ul>
+            <p className="reading mt-5 text-[0.7rem] tracking-[0.08em] text-slate">
               {site.signature}
             </p>
           </footer>

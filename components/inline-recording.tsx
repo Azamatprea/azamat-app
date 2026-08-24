@@ -6,11 +6,8 @@ import { useEffect, useRef, useState } from "react";
   Inline screen recording for case studies. Muted, looping, playsinline,
   controls chrome only on hover. Respects prefers-reduced-motion: no
   autoplay, tap to play. If the source file is missing, renders a clearly
-  marked placeholder frame instead of a black box.
-
-  TODO: replace with real screen recording, ~10-15s, Safecast assistant
-  answering a live query. Drop the file at public/media/safecast-demo.mp4
-  and a poster frame at public/media/safecast-poster.jpg.
+  marked placeholder frame instead of a black box. Source lives at
+  public/media/safecast-demo.mp4 with its poster frame alongside.
 */
 
 export function InlineRecording({

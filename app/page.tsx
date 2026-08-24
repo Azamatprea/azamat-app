@@ -56,8 +56,23 @@ export default function Home() {
 
       <BoundaryLine />
 
-      <Section label="Work">
-        <ul className="flex flex-col">
+      {/* Two columns: the roles timeline sits in the label margin and stays
+          sticky on desktop while the case study cards scroll past it. On
+          mobile it stacks — compact timeline first, cards below, no sticky. */}
+      <section className="grid gap-3 sm:grid-cols-[140px_1fr] sm:gap-6">
+        <aside className="sm:sticky sm:top-10 sm:self-start">
+          <p className="label pt-1">Work</p>
+          <ol className="mt-3 flex flex-col gap-3 sm:mt-5">
+            {site.timeline.map((role) => (
+              <li key={role.org} className="text-xs leading-relaxed">
+                <p className="font-medium">{role.org}</p>
+                <p className="text-slate">{role.title}</p>
+                <p className="reading text-slate">{role.years}</p>
+              </li>
+            ))}
+          </ol>
+        </aside>
+        <ul className="flex max-w-[640px] min-w-0 flex-col">
           {work.map((entry, i) => (
             <li
               key={entry.slug}
@@ -84,7 +99,7 @@ export default function Home() {
             </li>
           ))}
         </ul>
-      </Section>
+      </section>
 
       {posts.length > 0 && (
         <Section label="Writing">
@@ -119,42 +134,6 @@ export default function Home() {
         </Section>
       )}
 
-      <Section label="Elsewhere">
-        <ul className="flex flex-col gap-2 text-sm">
-          <li>
-            <a
-              href={site.links.github}
-              className="underline underline-offset-4 decoration-line-strong hover:decoration-ink"
-            >
-              GitHub
-            </a>
-          </li>
-          <li>
-            <a
-              href={site.links.linkedin}
-              className="underline underline-offset-4 decoration-line-strong hover:decoration-ink"
-            >
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a
-              href={`mailto:${site.email}`}
-              className="underline underline-offset-4 decoration-line-strong hover:decoration-ink"
-            >
-              {site.email}
-            </a>
-          </li>
-          <li>
-            <a
-              href={site.links.resume}
-              className="underline underline-offset-4 decoration-line-strong hover:decoration-ink"
-            >
-              Résumé (PDF)
-            </a>
-          </li>
-        </ul>
-      </Section>
     </div>
   );
 }

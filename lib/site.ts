@@ -29,6 +29,30 @@ export const site = {
   nowLine:
     "Currently in San Francisco, reading about what happened to on-prem search.",
   signature: "azamat erkinov \u00b7 san francisco",
+  // Reverse-chron roles for the sticky timeline next to Work. Same facts as
+  // the intro prose above \u2014 edit both together.
+  timeline: [
+    {
+      org: "Tensor AI",
+      title: "Forward Deployed Engineer",
+      years: "2026\u2013present",
+    },
+    {
+      org: "Safecast",
+      title: "Software Developer (part-time)",
+      years: "2025\u2013present",
+    },
+    {
+      org: "UL Solutions",
+      title: "AI Automation Intern",
+      years: "2025",
+    },
+    {
+      org: "Minerva University",
+      title: "B.S. Data Science & Economics",
+      years: "2024\u20132028",
+    },
+  ],
 } as const;
 
 export type Site = typeof site;

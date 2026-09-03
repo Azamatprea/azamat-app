@@ -19,6 +19,14 @@ export const site = {
       "https://www.compiled.sh/articles/c0mpiled-7-san-fransokyo#:~:text=Most%20Impressive-,Engineering%20Lift,-%3A%20Origin",
     aiconsensus: "https://www.aiconsensus.org/",
   } as Record<string, string>,
+  // Intro portrait. 4:5 crop, served from /public/media.
+  portrait: {
+    src: "/media/portrait.jpg",
+    alt: "Azamat Erkinov in front of a rainy Tokyo skyline",
+    caption: "Tokyo · 2026",
+    width: 800,
+    height: 1000,
+  },
   email: "azamat.erkinov@tensorai.io",
   links: {
     github: "https://github.com/Azamatprea",

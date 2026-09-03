@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { getWorkEntries, getPosts } from "@/lib/content";
@@ -23,8 +24,28 @@ export default function Home() {
   return (
     <div className="reveal flex flex-col gap-16">
       <Section label="Intro">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-5">{site.name}</h1>
-        <p className="text-lg text-slate mb-7 text-balance">{site.tagline}</p>
+        {/* Name and tagline on the left, a small framed portrait on the
+            right. On mobile the portrait sits above the name. */}
+        <div className="mb-7 flex flex-col-reverse gap-6 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-bold mb-5">{site.name}</h1>
+            <p className="text-lg text-slate text-balance">{site.tagline}</p>
+          </div>
+          <figure className="w-[120px] shrink-0 sm:w-[160px]">
+            <Image
+              src={site.portrait.src}
+              alt={site.portrait.alt}
+              width={site.portrait.width}
+              height={site.portrait.height}
+              sizes="160px"
+              priority
+              className="border border-line"
+            />
+            <figcaption className="reading mt-2 text-[0.7rem] tracking-[0.08em] text-slate">
+              {site.portrait.caption}
+            </figcaption>
+          </figure>
+        </div>
         <div className="flex flex-col gap-4">
           {renderCitedParagraphs(site.intro, site.citations)}
           <p>

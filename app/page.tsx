@@ -17,13 +17,6 @@ export const metadata: Metadata = {
   openGraph: ogImage(site.tagline),
 };
 
-// Real intrinsic pixel sizes of the cover images referenced in work
-// frontmatter; next/image needs them for the aspect ratio.
-const coverSizes: Record<string, { width: number; height: number }> = {
-  "safecast-assistant": { width: 1440, height: 772 },
-  origin: { width: 1920, height: 1006 },
-};
-
 export default function Home() {
   const work = getWorkEntries();
   const posts = getPosts().slice(0, 3);
@@ -35,9 +28,7 @@ export default function Home() {
             right. On mobile the portrait sits above the name. */}
         <div className="mb-7 flex flex-col-reverse gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <h1 className="text-[1.15rem] sm:text-[1.25rem] font-semibold mb-2">
-              {site.name}
-            </h1>
+            <h1 className="sr-only">{site.name}</h1>
             <p className="font-display text-ink text-[1.6rem] sm:text-[2.1rem] leading-tight text-balance">
               {site.tagline}
             </p>
@@ -113,8 +104,8 @@ export default function Home() {
                       <Image
                         src={entry.cover.src}
                         alt={entry.cover.alt}
-                        width={coverSizes[entry.slug].width}
-                        height={coverSizes[entry.slug].height}
+                        width={entry.cover.width}
+                        height={entry.cover.height}
                         sizes="132px"
                         priority={i === 0}
                         className="h-full w-full object-cover"

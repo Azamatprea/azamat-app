@@ -99,13 +99,16 @@ export default function RootLayout({
         </a>
         <div className="mx-auto max-w-[820px] px-6">
           <header className="flex flex-wrap items-baseline justify-between gap-y-3 pt-10 pb-16">
-            <nav aria-label="Main" className="flex items-baseline gap-7">
-              <Link
-                href="/"
-                className="font-display font-semibold tracking-tight hover:text-slate"
-              >
-                Azamat Erkinov
-              </Link>
+            <Link
+              href="/"
+              className="whitespace-nowrap font-display font-semibold tracking-tight hover:text-slate"
+            >
+              Azamat Erkinov
+            </Link>
+            <nav
+              aria-label="Main"
+              className="order-3 flex w-full items-baseline gap-7 sm:order-none sm:w-auto sm:ml-7"
+            >
               <Link href="/work" className="text-sm text-slate hover:text-ink">
                 Work
               </Link>
@@ -119,7 +122,7 @@ export default function RootLayout({
                 Interactions
               </Link>
             </nav>
-            <div className="ml-auto flex items-baseline gap-4">
+            <div className="order-2 ml-auto flex items-baseline gap-4 sm:order-none">
               <CommandPalette items={paletteItems} />
               <ThemeToggle />
             </div>

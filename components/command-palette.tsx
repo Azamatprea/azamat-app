@@ -123,7 +123,7 @@ export function CommandPalette({ items }: { items: PaletteItem[] }) {
         onClick={openPalette}
         aria-label="Open command palette"
         aria-haspopup="dialog"
-        className="reading border border-line px-1.5 py-0.5 text-[0.7rem] text-slate hover:border-line-strong hover:text-ink"
+        className="reading min-w-11 px-2 py-[14px] -my-[14px] -mx-2 text-center text-[0.7rem] text-slate hover:text-ink"
       >
         {isMac ? "⌘K" : "Ctrl K"}
       </button>

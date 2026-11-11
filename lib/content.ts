@@ -14,6 +14,7 @@ export type WorkEntry = {
   summary: string;
   stack: string[];
   links: Record<string, string>;
+  cover?: { src: string; alt: string };
   body: string;
 };
 

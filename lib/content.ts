@@ -14,7 +14,7 @@ export type WorkEntry = {
   summary: string;
   stack: string[];
   links: Record<string, string>;
-  cover?: { src: string; alt: string };
+  cover?: { src: string; alt: string; width: number; height: number };
   body: string;
 };
 
@@ -39,9 +39,21 @@ function readDir(dir: string) {
     });
 }
 
+function assertCoverSize(slug: string, cover: WorkEntry["cover"]) {
+  if (cover && (!Number.isFinite(cover.width) || !Number.isFinite(cover.height))) {
+    throw new Error(
+      `work/${slug}: cover frontmatter must include numeric width and height`
+    );
+  }
+}
+
 export function getWorkEntries(): WorkEntry[] {
   return readDir("work")
-    .map(({ data, content }) => ({ ...(data as Omit<WorkEntry, "body">), body: content }))
+    .map(({ data, content }) => {
+      const entry = { ...(data as Omit<WorkEntry, "body">), body: content };
+      assertCoverSize(entry.slug, entry.cover);
+      return entry;
+    })
     .sort((a, b) => a.order - b.order);
 }
 

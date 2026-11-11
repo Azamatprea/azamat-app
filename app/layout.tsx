@@ -93,13 +93,20 @@ export default function RootLayout({
         </a>
         <div className="mx-auto max-w-[820px] px-6">
           <header className="flex flex-wrap items-baseline justify-between gap-y-3 pt-10 pb-16">
-            <nav aria-label="Main" className="flex items-baseline gap-7">
-              <Link
-                href="/"
-                className="font-display font-semibold tracking-tight hover:text-slate"
-              >
-                Azamat Erkinov
-              </Link>
+            <Link
+              href="/"
+              className="order-1 whitespace-nowrap font-display font-semibold tracking-tight hover:text-slate"
+            >
+              Azamat Erkinov
+            </Link>
+            <div className="order-2 ml-auto flex items-baseline gap-4 sm:order-3">
+              <CommandPalette items={paletteItems} />
+              <ThemeToggle />
+            </div>
+            <nav
+              aria-label="Main"
+              className="order-3 flex w-full items-baseline gap-7 sm:order-2 sm:ml-7 sm:w-auto"
+            >
               <Link href="/work" className="text-sm text-slate hover:text-ink">
                 Work
               </Link>
@@ -113,10 +120,6 @@ export default function RootLayout({
                 Interactions
               </Link>
             </nav>
-            <div className="ml-auto flex items-baseline gap-4">
-              <CommandPalette items={paletteItems} />
-              <ThemeToggle />
-            </div>
           </header>
           <main id="main">{children}</main>
           <footer className="mt-24 border-t border-line pt-8 pb-14">

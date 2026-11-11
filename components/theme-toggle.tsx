@@ -27,7 +27,7 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-pressed={dark === true}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
-      className="label cursor-pointer border border-line-strong bg-panel px-2.5 py-1.5 rounded-[2px] hover:border-slate"
+      className="label cursor-pointer px-2 py-[14px] -my-[14px] -mx-2 text-slate hover:text-ink"
     >
       {dark ? "Light" : "Dark"}
     </button>

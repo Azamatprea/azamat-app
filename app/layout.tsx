@@ -92,7 +92,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <div className="mx-auto max-w-[820px] px-6">
-          <header className="flex items-baseline justify-between pt-10 pb-16">
+          <header className="flex flex-wrap items-baseline justify-between gap-y-3 pt-10 pb-16">
             <nav aria-label="Main" className="flex items-baseline gap-7">
               <Link
                 href="/"
@@ -113,7 +113,7 @@ export default function RootLayout({
                 Interactions
               </Link>
             </nav>
-            <div className="flex items-baseline gap-4">
+            <div className="ml-auto flex items-baseline gap-4">
               <CommandPalette items={paletteItems} />
               <ThemeToggle />
             </div>

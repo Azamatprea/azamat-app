@@ -95,17 +95,13 @@ export default function RootLayout({
           <header className="flex flex-wrap items-baseline justify-between gap-y-3 pt-10 pb-16">
             <Link
               href="/"
-              className="order-1 whitespace-nowrap font-display font-semibold tracking-tight hover:text-slate"
+              className="whitespace-nowrap font-display font-semibold tracking-tight hover:text-slate"
             >
               Azamat Erkinov
             </Link>
-            <div className="order-2 ml-auto flex items-baseline gap-4 sm:order-3">
-              <CommandPalette items={paletteItems} />
-              <ThemeToggle />
-            </div>
             <nav
               aria-label="Main"
-              className="order-3 flex w-full items-baseline gap-7 sm:order-2 sm:ml-7 sm:w-auto"
+              className="order-3 flex w-full items-baseline gap-7 sm:order-none sm:w-auto sm:ml-7"
             >
               <Link href="/work" className="text-sm text-slate hover:text-ink">
                 Work
@@ -120,6 +116,10 @@ export default function RootLayout({
                 Interactions
               </Link>
             </nav>
+            <div className="order-2 ml-auto flex items-baseline gap-4 sm:order-none">
+              <CommandPalette items={paletteItems} />
+              <ThemeToggle />
+            </div>
           </header>
           <main id="main">{children}</main>
           <footer className="mt-24 border-t border-line pt-8 pb-14">
